@@ -1,6 +1,9 @@
 import 'package:ecomrs_user_pannel/pages/launcher_page.dart';
 import 'package:ecomrs_user_pannel/pages/loginPage.dart';
 import 'package:ecomrs_user_pannel/pages/product_list_page.dart';
+import 'package:ecomrs_user_pannel/provider/cart_provider.dart';
+import 'package:ecomrs_user_pannel/provider/customer_provider.dart';
+import 'package:ecomrs_user_pannel/provider/order_provider.dart';
 import 'package:ecomrs_user_pannel/provider/product_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +23,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context)=>ProductProvider())
+        ChangeNotifierProvider(create: (context)=>ProductProvider()),
+        ChangeNotifierProvider(create: (context)=>CartProvider()),
+        ChangeNotifierProvider(create: (context)=>OrderProvider()),
+        ChangeNotifierProvider(create: (context)=>CustomerProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

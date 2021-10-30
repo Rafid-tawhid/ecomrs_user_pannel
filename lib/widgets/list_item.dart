@@ -1,7 +1,9 @@
 import 'package:ecomrs_user_pannel/models/product_model.dart';
+import 'package:ecomrs_user_pannel/provider/cart_provider.dart';
 import 'package:ecomrs_user_pannel/utilities/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductItems extends StatefulWidget {
   ProductModel _productModel;
@@ -38,18 +40,32 @@ class _ProductItemsState extends State<ProductItems> {
               subtitle: Text(widget._productModel.catagory!),
             ),
             Text('$taka${widget._productModel.price!}',style: TextStyle(color: Colors.red,fontSize: 20),),
-            ElevatedButton(onPressed: (){}, child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.shopping_cart),
-                Text(' Add to cart',style: TextStyle(fontSize: 14,color: Colors.white),),
-              ],
-            ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.deepOrange,
-              ),
+            Consumer<CartProvider>(
+                builder:(context,provider,_)=> ElevatedButton(onPressed: (){
+                  if(provider.isInCart(widget._productModel.id!))
+                    {
 
+                      provider.removeFromCart(widget._productModel.id!);
+                    }
+                  else
+                    {
+                      provider.addToCart(widget._productModel);
+                    }
+
+
+                }, child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.shopping_cart),
+                  Text(provider.isInCart(widget._productModel.id!)?'Remove': 'Add',style: TextStyle(fontSize: 14,color: Colors.white),),
+                ],
+              ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.deepOrange,
+                ),
+
+              ),
             )
 
           ],
