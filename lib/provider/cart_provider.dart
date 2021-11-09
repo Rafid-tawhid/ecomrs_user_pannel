@@ -32,6 +32,32 @@ class CartProvider extends ChangeNotifier{
   }
 
   int get totalsItemsInCart=>cartList.length;
+  num getPriceWithQty(CartModel cartModel)=>cartModel.price*cartModel.qty;
+
+
+  num get cartItemsTotalPrice{
+    num total=0;
+    cartList.forEach((element) {
+      total+=element.price*element.qty;
+
+    });
+    return total;
+  }
+  void decreaseQty(CartModel cartModel){
+    var index=cartList.indexOf(cartModel);
+    if(cartList[index].qty>1)
+      {
+        cartList[index].qty -=1;
+
+      }
+    notifyListeners();
+  }
+  void increseQty(CartModel cartModel){
+    var index=cartList.indexOf(cartModel);
+
+      cartList[index].qty +=1;
+      notifyListeners();
+  }
 
 }
 

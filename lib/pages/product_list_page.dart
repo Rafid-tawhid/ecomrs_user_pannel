@@ -1,9 +1,9 @@
 
-
-
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:ecomrs_user_pannel/pages/cart_page.dart';
+import 'package:ecomrs_user_pannel/provider/cart_provider.dart';
 import 'package:ecomrs_user_pannel/provider/product_provider.dart';
 import 'package:ecomrs_user_pannel/utilities/constant.dart';
 import 'package:ecomrs_user_pannel/widgets/drawer_main.dart';
@@ -30,26 +30,44 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Our Products",),
-        centerTitle: true,
-        actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart))
-        ],
-      ),
-      drawer: MainDrawer(),
-      body: _productProvider.productList.isEmpty ?Center(child: Text("No Product Found"),) :
+        appBar: AppBar(
+          title: const Text("Our Products",),
+          centerTitle: true,
+          actions: [
+            Consumer<CartProvider>(
+            builder:(context,prvider,_)=> Stack(
+                children: [
+                  IconButton(onPressed: (){
+                    Navigator.pushNamed(context, CartPage.routeName);
+                  }, icon: Icon(Icons.shopping_cart)),
+                  Container(
+                    alignment: Alignment.center,
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.red,
+                    ),
+                    child: FittedBox(child: Text('${prvider.totalsItemsInCart}')),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+        drawer: MainDrawer(),
+        body: _productProvider.productList.isEmpty ?Center(child: Text("No Product Found"),) :
 
-      GridView.count(
-        padding: EdgeInsets.all(8),
-        crossAxisCount: 2,
-        crossAxisSpacing: 4,
-        mainAxisSpacing: 4,
-        childAspectRatio: .5,
-        children: _productProvider.productList.map((e) => ProductItems(e)).toList(),
+        GridView.count(
+          padding: EdgeInsets.all(8),
+          crossAxisCount: 2,
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
+          childAspectRatio: .5,
+          children: _productProvider.productList.map((e) => ProductItems(e)).toList(),
 
 
-      )
+        )
     );
 
 
@@ -57,8 +75,8 @@ class _ProductListPageState extends State<ProductListPage> {
 
   Widget fadedImageWidget(String url){
     return FadeInImage.assetNetwork(placeholder: 'images/ph1.png', image: url,
-    fadeInDuration: Duration(seconds: 3),
-    fadeInCurve: Curves.bounceIn,fit: BoxFit.cover,);
+      fadeInDuration: Duration(seconds: 3),
+      fadeInCurve: Curves.bounceIn,fit: BoxFit.cover,);
   }
 
 

@@ -1,3 +1,4 @@
+import 'package:ecomrs_user_pannel/pages/cart_page.dart';
 import 'package:ecomrs_user_pannel/pages/launcher_page.dart';
 import 'package:ecomrs_user_pannel/pages/loginPage.dart';
 import 'package:ecomrs_user_pannel/pages/product_list_page.dart';
@@ -16,7 +17,6 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -40,7 +40,8 @@ class MyApp extends StatelessWidget {
         routes: {
           LauncherPage.routeName: (context) =>LauncherPage(),
           LoginPage.routeName: (context) =>LoginPage(),
-          ProductListPage.routeName: (context) =>ProductListPage()
+          ProductListPage.routeName: (context) =>ProductListPage(),
+          CartPage.routeName: (context) =>CartPage()
         },
       ),
     );
