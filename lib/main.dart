@@ -1,6 +1,8 @@
 import 'package:ecomrs_user_pannel/pages/cart_page.dart';
+import 'package:ecomrs_user_pannel/pages/customer_info_page.dart';
 import 'package:ecomrs_user_pannel/pages/launcher_page.dart';
 import 'package:ecomrs_user_pannel/pages/loginPage.dart';
+import 'package:ecomrs_user_pannel/pages/order_confirmation.dart';
 import 'package:ecomrs_user_pannel/pages/product_list_page.dart';
 import 'package:ecomrs_user_pannel/provider/cart_provider.dart';
 import 'package:ecomrs_user_pannel/provider/customer_provider.dart';
@@ -41,7 +43,9 @@ class MyApp extends StatelessWidget {
           LauncherPage.routeName: (context) =>LauncherPage(),
           LoginPage.routeName: (context) =>LoginPage(),
           ProductListPage.routeName: (context) =>ProductListPage(),
-          CartPage.routeName: (context) =>CartPage()
+          CartPage.routeName: (context) =>CartPage(),
+          CustomerInfoPage.routeName: (context) =>CustomerInfoPage(),
+          OrderConfirmationPage.routeName: (context) =>OrderConfirmationPage(),
         },
       ),
     );

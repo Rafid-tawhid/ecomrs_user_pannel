@@ -58,6 +58,19 @@ class CartProvider extends ChangeNotifier{
       cartList[index].qty +=1;
       notifyListeners();
   }
+  num get cartItemTotalsPrice{
+    num total=0;
+    cartList.forEach((element) {
+      total+=element.price*element.qty;
+
+    });
+    return total;
+  }
+
+  void removeAll(){
+    cartList.clear();
+    notifyListeners();
+}
 
 }
 

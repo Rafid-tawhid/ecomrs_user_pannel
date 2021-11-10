@@ -1,3 +1,4 @@
+import 'package:ecomrs_user_pannel/pages/customer_info_page.dart';
 import 'package:ecomrs_user_pannel/provider/cart_provider.dart';
 import 'package:ecomrs_user_pannel/utilities/constant.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +21,7 @@ class _CartPageState extends State<CartPage> {
           Consumer<CartProvider>(
             builder:(context,provider,_)=>
               IconButton(onPressed: (){
+                provider.removeAll();
 
               }, icon: Icon(Icons.cancel)))
         ],
@@ -71,8 +73,11 @@ class _CartPageState extends State<CartPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Price : '),//${provider.price}
-                  if(provider.totalsItemsInCart>0)TextButton(onPressed: (){}, child: Text('CheckOut'),
+                  Text('Price : ${provider.cartItemsTotalPrice}',style: TextStyle(color: Colors.white,fontSize: 18),),//
+                  if(provider.totalsItemsInCart>0)TextButton(onPressed:(){
+                    Navigator.pushNamed(context, CustomerInfoPage.routeName);
+                    
+                  }, child: Text('CheckOut'),
                     style: TextButton.styleFrom(
                         primary: Colors.white
                     ),)
